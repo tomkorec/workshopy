@@ -1,0 +1,37 @@
+{block content}
+<h1>Přihlašování do workshopů</h1>
+{if $user->isLoggedIn()}
+<form n:name=guestUpForm class=form id="mainForm">
+{foreach $workshops as $workshop}
+    {php $userCheck = 0;}
+    {foreach $entries as $entry}
+        {if $entry->user_id == $user->id && $entry->workshop_id == $workshop->id}
+            {php $userCheck++;}
+        {/if}
+    {/foreach}
+        <div class="workshop-item">
+            <input n:name=occupancy value="{$workshop->occupancy}">
+            <input n:name=capacity value="{$workshop->capacity}">
+            <input type=checkbox name="sel[]" style="float: left; width: 40px; height: 40px;" value={$workshop->id} {if $userCheck > 0 || $workshop->occupancy > $workshop->capacity}disabled{/if}>
+            <h2>{$workshop->name}</h2>
+            <div class="label">
+                {if $userCheck > 0}<strong>ZAPSÁN</strong>{/if}
+            </div>
+            <div class="label">
+                {if $workshop->occupancy >= $workshop->capacity}<strong>PLNO</strong>{/if}
+            </div>
+            <span>Cena: {$workshop->price},- Kč</span><br>
+            <span>Čas: {$workshop->time|date:'%H:%M'}</span><br>
+            <span>Obsazenost: {$workshop->occupancy}/{$workshop->capacity} lidí</span>
+            <div class="description">
+                {$workshop->description}
+            </div>
+
+        </div>
+{/foreach}
+<input n:name=send id="sendForm" disabled>
+</form>
+{else}
+Pokud se chcete přihlašovat na workshopy, musíte se nejprve přihlásit!
+{/if}
+{/block}

@@ -1,0 +1,6 @@
+database:
+	dsn: 'mysql:host=wm113.wedos.net;dbname=d164382_wshop'
+	user:	w164382_wshop
+	password:	3Ta9gVnD
+	options:
+		lazy: yes

@@ -1,0 +1,6 @@
+database:
+	dsn: 'mysql:host=wm146.wedos.net;dbname=d161172_triedr'
+	user:	w161172_triedr
+	password:	sA58VGjA
+	options:
+		lazy: yes
