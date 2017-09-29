@@ -15,7 +15,7 @@
             <input type=checkbox name="sel[]" style="float: left; width: 40px; height: 40px;" value={$workshop->id} {if $userCheck > 0 || $workshop->occupancy > $workshop->capacity}disabled{/if}>
             <h2>{$workshop->name}</h2>
             <div class="label">
-                {if $userCheck > 0}<strong>ZAPSÁN</strong>{/if}
+                {if $userCheck > 0}<strong>ZAPSÁNO</strong>{/if}
             </div>
             <div class="label">
                 {if $workshop->occupancy >= $workshop->capacity}<strong>PLNO</strong>{/if}
