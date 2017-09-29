@@ -1,2 +1,17 @@
 {block content}
 <h1>Moje zapsané</h1>
+{foreach $workshops as $workshop}
+    {foreach $entries as $entry}
+        {if $workshop->id == $entry->workshop_id && $user->id == $entry->user_id}
+            <div class="workshop-item">
+                <h2>{$workshop->name}</h2>
+                <span>Cena: {$workshop->price},- Kč</span><br>
+                <span>Čas: {$workshop->time|date:'%H:%M'}</span><br>
+                <div class="description">
+                    {$workshop->description}
+                </div>
+
+            </div>
+        {/if}
+    {/foreach}
+{/foreach}
