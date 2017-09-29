@@ -81,4 +81,9 @@ class HomepagePresenter extends BasePresenter
 		$this->template->workshops = $this->database->table('workshops');
                 $this->template->entries = $this->database->table('entries');
 	}
+
+        public function renderOverview() {
+            $this->template->workshops = $this->database->table('workshops');
+            $this->template->entries = $this->database->table('entries');
+        }
 }
