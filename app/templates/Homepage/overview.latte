@@ -1,5 +1,6 @@
 {block content}
 <h1>Moje zapsané</h1>
+Celková částka: {$currentPrice},- Kč
 {foreach $workshops as $workshop}
     {foreach $entries as $entry}
         {if $workshop->id == $entry->workshop_id && $user->id == $entry->user_id}
