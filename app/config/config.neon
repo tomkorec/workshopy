@@ -21,4 +21,11 @@ services:
 	- App\Forms\SignInFormFactory
 	- App\Forms\SignUpFormFactory
 	- App\Forms\GuestUpFormFactory
+	mailer: Nette\Mail\SmtpMailer
 	router: App\RouterFactory::createRouter
+mail:
+	smtp: true
+	host: smtp.google.com
+	port: 465    
+	username: noreply@cesta-ven.cz
+	password: VelmiEkologickeNaucno
