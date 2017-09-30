@@ -20,7 +20,7 @@
             <div class="label">
                 {if $workshop->occupancy >= $workshop->capacity}<strong>PLNO</strong>{/if}
             </div>
-            <span>Cena: {$workshop->price},- Kč</span><br>
+            <span class="price" value="{$workshop->price}">Cena: {$workshop->price},- Kč</span><br>
             <span>Čas: od {$workshop->time_from|date:'%H:%M'} do {$workshop->time_to|date:'%H:%M'}</span><br>
             <span>Obsazenost: {$workshop->occupancy}/{$workshop->capacity} lidí</span>
             <div class="description">
@@ -29,6 +29,7 @@
 
         </div>
 {/foreach}
+<div>Celková cena: <span class="totalPrice">0</span>,- Kč </div>
 <input n:name=send id="sendForm" disabled>
 </form>
 {else}
