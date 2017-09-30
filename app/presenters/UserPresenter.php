@@ -23,7 +23,32 @@ class UserPresenter extends BasePresenter
         $this->workshopManager = $workshopManager;
     }
     
+    public function createComponentRegistrationConfirm() {
+        $form = new Form;
+        $form->addText('code','Kód');
+        $form->addSubmit('send','Potvrdit');
+        $form->onSuccess[] = [$this,'confirmRegistration'];
+        return $form;
+    }
+    
+    public function confirmRegistration(Form $form, $values){
+        $currentUser = $this->database->table('users')->where('registration_code',$values->code)->fetch();
+        if($currentUser){
+            $currentUser->update([
+            'active' => 1,
+        ]);
+        $this->flashMessage('Váš účet byl úspěšně aktivován! Nyní se můžete přihlásit');
+        $this->redirect('Sign:in');
+        }else{
+            $this->flashMessage('Registrační kód byl chybně zadán','error');
+        }
+        
+    }
 
+    public function renderDefault(){
+        
+    }
+    
     
     
 }
