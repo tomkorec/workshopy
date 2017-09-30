@@ -21,7 +21,7 @@
                 {if $workshop->occupancy >= $workshop->capacity}<strong>PLNO</strong>{/if}
             </div>
             <span>Cena: {$workshop->price},- Kč</span><br>
-            <span>Čas: {$workshop->time|date:'%H:%M'}</span><br>
+            <span>Čas: od {$workshop->time_from|date:'%H:%M'} do {$workshop->time_to|date:'%H:%M'}</span><br>
             <span>Obsazenost: {$workshop->occupancy}/{$workshop->capacity} lidí</span>
             <div class="description">
                 {$workshop->description}
