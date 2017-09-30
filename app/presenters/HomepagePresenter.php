@@ -43,9 +43,30 @@ class HomepagePresenter extends BasePresenter
                     foreach ($workshopIds as $wId){ //srovná nové přírůstky se stávajícími workshopy
                         $newWorkshop = $this->database->table('workshops')->get($wId);
                         $workshopEntries = $entries->where('user_id',$userId);
+                        
+                        $wsChoosed = $this->database->table('workshops')->get($wId);
+                        
+                        foreach ($workshopIds as $wIdt){
+                            $currentWorkshop = $this->database->table('workshops')->get($wIdt);
+                            if($currentWorkshop->id != $wsChoosed->id){
+                                $result = $this->workshopManager->checkNewOverlap($wsChoosed, $currentWorkshop);
+                               
+                                if($result > 0){
+                                    $this->flashMessage("Časy workshopů ".$newWorkshop
+                                            ->name." a ".$currentWorkshop
+                                            ->name." se překrývají","error");
+                                    $this->redirect('Homepage:');
+                                    break;
+                                }
+                                
+                            }
+                        }
+                        
                         foreach ($workshopEntries as $workshopEntry){
+                            
                             $currentWorkshop = $workshops->get($workshopEntry->workshop_id);
                             $result = $this->workshopManager->checkNewOverlap($newWorkshop, $currentWorkshop);
+                            
                             if($result > 0){
                                 $this->flashMessage("Časy workshopů ".$newWorkshop->name." a ".$currentWorkshop->name." se překrývají","error");
                                 $this->redirect('Homepage:');
