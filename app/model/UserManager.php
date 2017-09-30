@@ -4,6 +4,9 @@ namespace App\Model;
 
 use Nette;
 use Nette\Security\Passwords;
+use Nette\Mail\Message;
+use Nette\Mail\SendmailMailer;
+use Nette\Mail\SmtpMailer;
 
 
 /**
@@ -24,7 +27,9 @@ class UserManager implements Nette\Security\IAuthenticator
 
 	/** @var Nette\Database\Context */
 	private $database;
-
+        
+        /** @var Nette\Mail\IMailer @inject */
+        public $mailer;
 
 	public function __construct(Nette\Database\Context $database)
 	{
@@ -74,14 +79,48 @@ class UserManager implements Nette\Security\IAuthenticator
 	public function add($username, $email, $password)
 	{
 		try {
-			$this->database->table(self::TABLE_NAME)->insert([
+			
+                        $this->database->table(self::TABLE_NAME)->insert([
 				self::COLUMN_NAME => $username,
 				self::COLUMN_PASSWORD_HASH => Passwords::hash($password),
 				self::COLUMN_EMAIL => $email,
 			]);
+                        $this->sendRegMail($username,$email);
 		} catch (Nette\Database\UniqueConstraintViolationException $e) {
 			throw new DuplicateNameException;
 		}
+	}
+        
+        public function sendRegMail($username,$email){
+            $mail = new Message;
+            $registrationCode = $this->generateRecovery();
+            $userIdentity = $this->database->table('users')->where('username',$username)->fetch();
+            
+            $userIdentity->update([
+                'registration_code' => $registrationCode,
+            ]);
+            $mail->setFrom('noreply@cesta-ven.cz')
+                    ->addTo($email)
+                    ->setSubject('Registrace na Workshopy | Dudlík fest 2017')
+                    ->setHtmlBody('Dobrý den,<br>'
+                            . 'pro dokončení registrace navštivte adresu'
+                            . ' http://workshopy.cesta-ven.cz/user/registration?'.$registrationCode.'.'
+                            . ' <br><br>S pozdravem,<br>'
+                            . 'team Dudlík fest');
+            $mailer = new SendmailMailer;
+            //die();
+            //var_dump($mail);
+            $mailer->send($mail);
+        }
+
+                public function generateRecovery($length = 15){
+		$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		$charactersLength = strlen($characters);
+	    $randomString = '';
+	    for ($i = 0; $i < $length; $i++) {
+	        $randomString .= $characters[rand(0, $charactersLength - 1)];
+	    }
+	    return $randomString;
 	}
 }
 
