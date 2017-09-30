@@ -83,7 +83,24 @@ class HomepagePresenter extends BasePresenter
 	}
 
         public function renderOverview() {
-            $this->template->workshops = $this->database->table('workshops');
-            $this->template->entries = $this->database->table('entries');
+            
+            $workshops = $this->database->table('workshops');
+            $entries = $this->database->table('entries');
+            //!spočítat přehledy
+            
+            //spočítat celkovou částku
+            $currentPrice = 0;
+            foreach ($workshops as $workshop){
+                foreach ($entries as $entry){
+                    if($workshop->id == $entry->workshop_id
+                            && $this->user->id == $entry->user_id){
+                        $currentPrice += $workshop->price;
+                    }
+                }
+            }
+            
+            $this->template->currentPrice  = $currentPrice;
+            $this->template->workshops = $workshops;
+            $this->template->entries = $entries;
         }
 }
