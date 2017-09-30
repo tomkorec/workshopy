@@ -7,7 +7,7 @@ Celková částka: {$currentPrice},- Kč
             <div class="workshop-item">
                 <h2>{$workshop->name}</h2>
                 <span>Cena: {$workshop->price},- Kč</span><br>
-                <span>Čas: {$workshop->time|date:'%H:%M'}</span><br>
+                <span>Čas: od {$workshop->time_from|date:'%H:%M'} do {$workshop->time_to|date:'%H:%M'}</span><br>
                 <div class="description">
                     {$workshop->description}
                 </div>
