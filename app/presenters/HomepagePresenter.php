@@ -35,8 +35,26 @@ class HomepagePresenter extends BasePresenter
 
 	public function guestUpFormSuccess(Form $form,$values){
 		$workshopIds = $form->getHttpData($form::DATA_TEXT | $form::DATA_KEYS, 'sel[]');
+                $workshops = $this->database->table('workshops');
+                $entries = $this->database->table('entries');
                 if($this->user->isLoggedIn()){
                     $userId = $this->user->id;
+                    
+                    foreach ($workshopIds as $wId){ //srovná nové přírůstky se stávajícími workshopy
+                        $newWorkshop = $this->database->table('workshops')->get($wId);
+                        $workshopEntries = $entries->where('user_id',$userId);
+                        foreach ($workshopEntries as $workshopEntry){
+                            $currentWorkshop = $workshops->get($workshopEntry->workshop_id);
+                            $result = $this->workshopManager->checkNewOverlap($newWorkshop, $currentWorkshop);
+                            if($result > 0){
+                                $this->flashMessage("Časy workshopů ".$newWorkshop->name." a ".$currentWorkshop->name." se překrývají","error");
+                                $this->redirect('Homepage:');
+                                break;
+                            }
+                        }
+                    }
+                    
+                    
                     foreach ($workshopIds as $workshopId){
                         if($values->capacity <= $values->occupancy){    //check for occupancy limit
                             $this->flashMessage('Kapacita workshopu byla vyčerpána.','error');
@@ -48,6 +66,7 @@ class HomepagePresenter extends BasePresenter
                         foreach($entries as $entry){
                             if($entry->user_id == $this->user->id && $entry->workshop_id == $workshopId){   //jde o tentýž wshop?
                                 $checkEntry++;
+                                
                             }
                         }
                         if($checkEntry > 0){   //check for user already signed
@@ -61,6 +80,7 @@ class HomepagePresenter extends BasePresenter
                     ]);
                         $occupancy = $this->database->table('workshops')->get($workshopId)->occupancy;
                         $occupancy++;
+                        
                         $this->database->table('workshops')->get($workshopId)->update([
                         'occupancy' => $occupancy,
                     ]);
@@ -71,10 +91,7 @@ class HomepagePresenter extends BasePresenter
                     $this->error('Nelze provést - uživatel není přihlášen');
                 }
 		$this->redirect('Homepage:');
-	}
-
-
-
+        }
 
 	public function renderDefault()
 	{
