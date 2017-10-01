@@ -65,12 +65,14 @@ class HomepagePresenter extends BasePresenter
                         foreach ($workshopEntries as $workshopEntry){
                             
                             $currentWorkshop = $workshops->get($workshopEntry->workshop_id);
+                            if($currentWorkshop->id != $workshopEntry->id){
                             $result = $this->workshopManager->checkNewOverlap($newWorkshop, $currentWorkshop);
                             
                             if($result > 0){
                                 $this->flashMessage("Časy workshopů ".$newWorkshop->name." a ".$currentWorkshop->name." se překrývají","error");
                                 $this->redirect('Homepage:');
                                 break;
+                            }
                             }
                         }
                     }
@@ -118,6 +120,9 @@ class HomepagePresenter extends BasePresenter
 	{
 		$this->template->workshops = $this->database->table('workshops');
                 $this->template->entries = $this->database->table('entries');
+                if(!$this->user->isLoggedIn()){
+                    $this->redirect('Sign:in');
+                }
 	}
 
         public function renderOverview() {
