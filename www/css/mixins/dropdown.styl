@@ -1,0 +1,27 @@
+dropdown()
+    .dropdown-content
+        display none
+        background-color rgba(255,255,255,1)
+        width 210px
+        font-size 16px
+        line-height 20px
+        overflow auto
+        float right
+        position relative
+        top 70px
+        right -100px
+        +below('m')
+            position absolute
+            width 100%
+            left 0
+        box-shadow 0px 4px 8px 0px rgba(0,0,0,0.2)
+    .dropdown-content a 
+        padding 12px 16px
+        text-decoration none
+        display block
+
+    .dropdown a:hover
+        background-color #f1f1f1
+        color black
+    .show
+        display block

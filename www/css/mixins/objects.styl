@@ -1,0 +1,203 @@
+navbar()
+	nav
+		line-height 70px
+		height 70px
+		background-color white
+		color shady
+		links()
+		box-shadow()
+		.navTitle
+			font-size 24px
+			font-weight bold
+			float left
+		.loginBar
+			float right
+			font-size 17px
+			font-weight bold
+		dropdown()
+main()
+	margin-top 80px
+	color shady
+	.topbar
+		background-color white
+		box-shadow()
+		margin-bottom 10px
+		h1
+			font-size 35px
+			font-weight 300
+			text-align center
+			margin-top 40px
+			margin-bottom 0
+			font-family 'Lato'
+			text-rendering optimizeLegibility
+		h2
+			font-weight 300
+			font-size 24px
+			text-align center
+			margin-top 40px
+			margin-bottom 40px
+			text-rendering optimizeLegibility
+			
+			
+	.content
+		box-shadow()
+		.workshopItem.disabled:hover
+			filter grayscale(100%)
+			transition()
+		.workshopItem
+			transition()
+			padding-bottom 20px
+			color shady
+			checkbox()
+			padding 30px
+			.textContent
+				box-sizing()
+				.description
+					padding-left 60px
+					width 100%
+					text-align justify
+					line-height 30px
+					box-sizing()
+				.right-panel
+					float right
+					text-align right
+					ul
+						margin 0
+						
+						li
+							font-family 'Lato'
+							
+							display inline
+							line-height 30px
+							list-style-type none
+							padding 5px 0 5px 60px
+							margin 0
+						
+		background-color white
+		input[type=checkbox]
+			float left
+		h3
+			font-size 25px
+			font-weight 400
+			margin 0
+			margin-right 20px
+			display inline
+		.subscribed
+			background-color green
+			color white
+			padding 2px 7px
+		.occupied
+			background-color red
+			color white
+			padding 2px 7px
+		.submitWorkshops
+			links()
+			input[type=submit]
+				font-size 24px
+				line-height 64px
+				height 64px
+				width 300px
+				padding 0 20px
+				margin-bottom 50px
+		.totalPrice
+			text-align center
+			display block
+			font-size 15px
+			margin-bottom 10px
+			color shady
+			font-weight 300
+			strong
+				font-weight 400
+
+@keyframes pulse {
+			0% {
+				filter hue-rotate(0deg)
+			}
+			100%{
+				filter hue-rotate(360deg)
+			}
+		}
+
+login()
+	width 100%
+	position absolute
+	background url(../images/bg.png)
+	//animation-name pulse
+	animation-duration 90s
+	animation-iteration-count infinite
+	top 0
+	left 0
+	height 100%
+	//background-color red
+	.loginBox
+		center(480px)
+		margin-top 120px
+		height 640px
+		background-color rgba(255,255,255,0.2)
+		img
+			center(169px)
+			margin-top 80px
+		h1
+			font-size 35px
+			font-weight bold
+			font-family 'Lato'
+			color white
+			text-align center
+			margin-top 30px
+			margin-bottom 70px
+		input[type=text],input[type=password],input[type=email]
+			center(300px)
+			line-height 40px
+			font-size 15px
+			font-family 'Lato'
+			color rgba(255,255,255,255,0.5)
+			background transparent
+			border 1px solid
+			border-color rgba(255,255,255,0.5)
+			width 300px
+			outline none
+			padding-left 10px
+			margin-bottom 10px
+			transition()
+		input[type=text]:focus,input[type=password]:focus,input[type=email]:focus
+			border-color rgba(255,255,255,1)
+			transition()
+		::-webkit-input-placeholder
+			color rgba(255,255,255,0.5)
+		::-moz-input-placeholder
+			color rgba(255,255,255,0.5)
+		:-ms-input-placeholder
+			color rgba(255,255,255,0.5)
+		:-moz-input-placeholder
+			color rgba(255,255,255,0.5)
+		.line-cont
+			center(300px)
+		checkbox()
+		.realLabel
+			font-size 15px
+			color white
+			margin-left 15px
+		links()
+		input[type=submit]
+			margin-top 35px
+			margin-bottom 20px
+		a
+			color rgba(255,255,255,0.5)
+		a:hover
+			color rgba(255,255,255,1)
+			
+
+footer()
+	position absolute
+	right 0
+	bottom 0
+	left 0
+	height 40px
+	background-color white
+	color rgb(150,150,150)
+	.left
+		float left
+		line-height 40px
+	.right
+		float right
+		line-height 40px

@@ -4,7 +4,16 @@ $('#mainForm').click(function(){
     } else {
         $('#sendForm').attr("disabled","disabled");   
     }
+    
+    
 });
+
+$('document').on('load',function(){
+   if($('input[type=checkbox]').prop('disabled',true)){
+        $(this).parent('.checkbox').css('visibility','hidden');
+    } 
+});
+
 var totalPrice = 0;
 $('input[type=checkbox]').change(function(){
     
@@ -12,7 +21,7 @@ $('input[type=checkbox]').change(function(){
         $(this).each(function(){
             totalPrice = totalPrice + parseInt($(this).siblings('.price').attr('value'));
         });
-        $('.totalPrice').text(totalPrice);
+        $('.totalPrice').text("Celková cena vybraných workshopů: "+totalPrice+",- Kč");
         $(this).parent().addClass("checkedBg");
 
         
@@ -20,7 +29,7 @@ $('input[type=checkbox]').change(function(){
         $(this).each(function(){
             totalPrice = totalPrice - parseInt($(this).siblings('.price').attr('value'));
         });
-        $('.totalPrice').text(totalPrice);
+        $('.totalPrice').text("Celková cena vybraných workshopů: "+totalPrice+",- Kč");
         $(this).parent().removeClass("checkedBg");
     }
 });
