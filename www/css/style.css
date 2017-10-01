@@ -1,3 +1,20 @@
+div.flash {
+  color: #000;
+  background: #fff9d7;
+  border: 1px solid #e2c822;
+  padding: 1em;
+  margin-top: 80px;
+  position: absolute;
+  width: 100%;
+}
+div.flash.error {
+  background-color: #ffd8d8;
+  border: 1px solid #b9514f;
+}
+div.flash.success {
+  background-color: #dfffd8;
+  border: 1px solid #4fb957;
+}
 @-moz-keyframes pulse {
   0% {
     filter: hue-rotate(0deg);
@@ -53,7 +70,25 @@ body {
   padding-bottom: 6rem;
   background-color: #f0f0f0;
   text-rendering: optimizeLegibility;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Open Sans', sans-serif;
+}
+body.bodyBg {
+  background: url("../images/bg.png");
+  animation-duration: 90s;
+  background-size: cover;
+  padding-top: 120px;
+  background-repeat: no-repeat;
+  animation-iteration-count: infinite;
+}
+@media only screen and (max-width: 800px) {
+  body.bodyBg {
+    background: #8a3a41;
+  }
+}
+@media only screen and (max-width: 800px) {
+  body.bodyBg {
+    padding-top: 0;
+  }
 }
 .container {
   *zoom: 1;
@@ -81,6 +116,12 @@ section#navbar nav {
   color: #5a5a5a;
   -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,0.17);
   box-shadow: 0 1px 1px 0 rgba(0,0,0,0.17);
+}
+@media only screen and (max-width: 1800px) {
+  section#navbar nav .container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 }
 section#navbar nav a {
   text-decoration: none;
@@ -116,7 +157,7 @@ section#navbar nav input[type=submit] {
   font-size: 15px;
   font-weight: bold;
   text-rendering: optimizeLegibility;
-  font-family: 'Lato';
+  font-family: 'Open Sans';
   cursor: pointer;
   outline: none;
   border: none;
@@ -136,6 +177,12 @@ section#navbar nav input[type=submit]:after {
 section#navbar nav a.btn:after,
 section#navbar nav input[type=submit]:after {
   clear: both;
+}
+@media only screen and (max-width: 800px) {
+  section#navbar nav a.btn,
+  section#navbar nav input[type=submit] {
+    width: 100%;
+  }
 }
 section#navbar nav a.btn:hover,
 section#navbar nav input[type=submit]:hover {
@@ -212,13 +259,19 @@ section#main .topbar {
   box-shadow: 0 1px 1px 0 rgba(0,0,0,0.17);
   margin-bottom: 10px;
 }
+@media only screen and (max-width: 800px) {
+  section#main .topbar {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
 section#main .topbar h1 {
   font-size: 35px;
   font-weight: 300;
   text-align: center;
   margin-top: 40px;
   margin-bottom: 0;
-  font-family: 'Lato';
+  font-family: 'Open Sans';
   text-rendering: optimizeLegibility;
 }
 section#main .topbar h2 {
@@ -233,6 +286,12 @@ section#main .content {
   -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,0.17);
   box-shadow: 0 1px 1px 0 rgba(0,0,0,0.17);
   background-color: #fff;
+}
+@media only screen and (max-width: 800px) {
+  section#main .content {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 }
 section#main .content .workshopItem.disabled:hover {
   filter: grayscale(100%);
@@ -377,15 +436,55 @@ section#main .content .workshopItem .textContent .description {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
+@media only screen and (max-width: 800px) {
+  section#main .content .workshopItem .textContent .description {
+    padding-left: 0;
+  }
+}
+section#main .content .workshopItem .textContent .info-panel-mobile {
+  display: none;
+}
+section#main .content .workshopItem .textContent .info-panel-mobile ul {
+  margin: 0;
+  -webkit-padding-start: 0;
+  width: 100%;
+}
+section#main .content .workshopItem .textContent .info-panel-mobile li {
+  font-family: 'Open Sans';
+  display: block;
+  width: 100%;
+  padding: 10px 0;
+  background-color: #4fb957;
+  color: #fff;
+}
+section#main .content .workshopItem .textContent .info-panel-mobile li i {
+  border-radius: 100%;
+  background-color: #fff;
+  padding: 5px;
+  margin-left: 10px;
+  position: relative;
+  color: #4fb957;
+}
+@media only screen and (max-width: 800px) {
+  section#main .content .workshopItem .textContent .info-panel-mobile {
+    display: block;
+  }
+}
 section#main .content .workshopItem .textContent .right-panel {
   float: right;
   text-align: right;
 }
+@media only screen and (max-width: 800px) {
+  section#main .content .workshopItem .textContent .right-panel {
+    display: none;
+  }
+}
 section#main .content .workshopItem .textContent .right-panel ul {
   margin: 0;
+  -webkit-padding-start: 0;
 }
 section#main .content .workshopItem .textContent .right-panel ul li {
-  font-family: 'Lato';
+  font-family: 'Open Sans';
   display: inline;
   line-height: 30px;
   list-style-type: none;
@@ -402,15 +501,33 @@ section#main .content h3 {
   margin-right: 20px;
   display: inline;
 }
+@media only screen and (max-width: 800px) {
+  section#main .content h3 {
+    display: block;
+    line-height: 40px;
+    margin-right: 0;
+    text-align: right;
+  }
+}
 section#main .content .subscribed {
   background-color: #4fb957;
   color: #fff;
   padding: 2px 7px;
 }
+@media only screen and (max-width: 800px) {
+  section#main .content .subscribed {
+    float: right;
+  }
+}
 section#main .content .occupied {
   background-color: #b9514f;
   color: #fff;
   padding: 2px 7px;
+}
+@media only screen and (max-width: 800px) {
+  section#main .content .occupied {
+    float: right;
+  }
 }
 section#main .content .submitWorkshops a {
   text-decoration: none;
@@ -446,7 +563,7 @@ section#main .content .submitWorkshops input[type=submit] {
   font-size: 15px;
   font-weight: bold;
   text-rendering: optimizeLegibility;
-  font-family: 'Lato';
+  font-family: 'Open Sans';
   cursor: pointer;
   outline: none;
   border: none;
@@ -466,6 +583,12 @@ section#main .content .submitWorkshops input[type=submit]:after {
 section#main .content .submitWorkshops a.btn:after,
 section#main .content .submitWorkshops input[type=submit]:after {
   clear: both;
+}
+@media only screen and (max-width: 800px) {
+  section#main .content .submitWorkshops a.btn,
+  section#main .content .submitWorkshops input[type=submit] {
+    width: 100%;
+  }
 }
 section#main .content .submitWorkshops a.btn:hover,
 section#main .content .submitWorkshops input[type=submit]:hover {
@@ -497,6 +620,11 @@ section#main .content .submitWorkshops input[type=submit] {
   padding: 0 20px;
   margin-bottom: 50px;
 }
+@media only screen and (max-width: 800px) {
+  section#main .content .submitWorkshops input[type=submit] {
+    width: 100%;
+  }
+}
 section#main .content .totalPrice {
   text-align: center;
   display: block;
@@ -505,18 +633,13 @@ section#main .content .totalPrice {
   color: #5a5a5a;
   font-weight: 300;
 }
+@media only screen and (max-width: 800px) {
+  section#main .content .totalPrice {
+    display: none;
+  }
+}
 section#main .content .totalPrice strong {
   font-weight: 400;
-}
-section#login {
-  width: 100%;
-  position: absolute;
-  background: url("../images/bg.png");
-  animation-duration: 90s;
-  animation-iteration-count: infinite;
-  top: 0;
-  left: 0;
-  height: 100%;
 }
 section#login .loginBox {
   *zoom: 1;
@@ -528,7 +651,6 @@ section#login .loginBox {
   margin-left: auto;
   padding-left: 0;
   padding-right: 0;
-  margin-top: 120px;
   height: 640px;
   background-color: rgba(255,255,255,0.2);
 }
@@ -539,6 +661,13 @@ section#login .loginBox:after {
 }
 section#login .loginBox:after {
   clear: both;
+}
+@media only screen and (max-width: 800px) {
+  section#login .loginBox {
+    background-color: rgba(255,255,255,0);
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 }
 section#login .loginBox img {
   *zoom: 1;
@@ -563,7 +692,7 @@ section#login .loginBox img:after {
 section#login .loginBox h1 {
   font-size: 35px;
   font-weight: bold;
-  font-family: 'Lato';
+  font-family: 'Open Sans';
   color: #fff;
   text-align: center;
   margin-top: 30px;
@@ -583,7 +712,7 @@ section#login .loginBox input[type=email] {
   padding-right: 0;
   line-height: 40px;
   font-size: 15px;
-  font-family: 'Lato';
+  font-family: 'Open Sans';
   color: #fff;
   background: transparent;
   border: 1px solid;
@@ -611,6 +740,13 @@ section#login .loginBox input[type=text]:after,
 section#login .loginBox input[type=password]:after,
 section#login .loginBox input[type=email]:after {
   clear: both;
+}
+@media only screen and (max-width: 800px) {
+  section#login .loginBox input[type=text],
+  section#login .loginBox input[type=password],
+  section#login .loginBox input[type=email] {
+    width: 100%;
+  }
 }
 section#login .loginBox input[type=text]:focus,
 section#login .loginBox input[type=password]:focus,
@@ -803,7 +939,7 @@ section#login .loginBox input[type=submit] {
   font-size: 15px;
   font-weight: bold;
   text-rendering: optimizeLegibility;
-  font-family: 'Lato';
+  font-family: 'Open Sans';
   cursor: pointer;
   outline: none;
   border: none;
@@ -823,6 +959,12 @@ section#login .loginBox input[type=submit]:after {
 section#login .loginBox a.btn:after,
 section#login .loginBox input[type=submit]:after {
   clear: both;
+}
+@media only screen and (max-width: 800px) {
+  section#login .loginBox a.btn,
+  section#login .loginBox input[type=submit] {
+    width: 100%;
+  }
 }
 section#login .loginBox a.btn:hover,
 section#login .loginBox input[type=submit]:hover {
@@ -862,6 +1004,7 @@ footer {
   bottom: 0;
   left: 0;
   height: 40px;
+  line-height: 40px;
   background-color: #fff;
   color: #969696;
 }

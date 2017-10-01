@@ -107,7 +107,10 @@ class UserManager implements Nette\Security\IAuthenticator
                     ->setSubject('Registrace na Workshopy | Dudlík fest 2017')
                     ->setHtmlBody('Dobrý den,<br>'
                             . 'pro dokončení registrace navštivte adresu'
-                            . ' http://workshopy.cesta-ven.cz/user/registration?'.$registrationCode.'.'
+                            . '<a href="http://workshopy.cesta-ven.cz/user/registration?code='.$registrationCode.'">'
+                            . 'http://workshopy.cesta-ven.cz/user/registration?code='.$registrationCode.'</a>,<br>'
+                            . 'nebo na zadejte na adrese <a href="http://workshopy.cesta-ven.cz/user/registration">'
+                            . 'této</a> adrese kód <strong>'.$registrationCode.'</strong>'
                             . ' <br><br>S pozdravem,<br>'
                             . 'team Dudlík fest');
             $mailer = new SendmailMailer;

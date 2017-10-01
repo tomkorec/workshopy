@@ -1,20 +1,40 @@
 {block content}
-{if $user->isLoggedIn()}
-<h1>Moje zapsané</h1>
-Celková částka: {$currentPrice},- Kč
-{foreach $workshops as $workshop}
-    {foreach $entries as $entry}
-        {if $workshop->id == $entry->workshop_id && $user->id == $entry->user_id}
-            <div class="workshop-item">
-                <h2>{$workshop->name}</h2>
-                <span>Cena: {$workshop->price},- Kč</span><br>
-                <span>Čas: od {$workshop->time_from|date:'%H:%M'} do {$workshop->time_to|date:'%H:%M'}</span><br>
-                <div class="description">
-                    {$workshop->description}
-                </div>
-
-            </div>
-        {/if}
-    {/foreach}
-{/foreach}
-{/if}
+<section id="main">
+	<div class="topbar container">
+		<h1>Moje zapsané</h1>
+		<h2>Celková částka: {$currentPrice},- Kč</h2>
+	</div>
+	{if $user->isLoggedIn()}
+	<div class="content container">
+		{foreach $workshops as $workshop}
+		    {foreach $entries as $entry}
+		        {if $entry->user_id == $user->id && $entry->workshop_id == $workshop->id}
+					<div class="workshopItem">
+						<div class="textContent">
+							<div class="right-panel">
+								<ul>
+									<li><i class="fa fa-clock-o" aria-hidden="true"></i> {$workshop->time_from|date:'%H:%M'} - {$workshop->time_to|date:'%H:%M'}</li>
+									<li><i class="fa fa-money" aria-hidden="true"></i> {$workshop->price},- Kč</li>
+									<li><i class="fa fa-users" aria-hidden="true"></i>  {$workshop->occupancy}/{$workshop->capacity} 
+									</li>
+								</ul>
+							</div>
+							<div class="description">
+								<h3>{$workshop->name}</h3>
+								<p>{$workshop->description}</p>
+							</div>
+							<div class="info-panel-mobile">
+								<ul>
+									<li><i class="fa fa-clock-o" aria-hidden="true"></i> {$workshop->time_from|date:'%H:%M'} - {$workshop->time_to|date:'%H:%M'}</li>
+									<li><i class="fa fa-money" aria-hidden="true"></i> {$workshop->price},- Kč</li>
+									<li><i class="fa fa-users" aria-hidden="true"></i>  {$workshop->occupancy}/{$workshop->capacity}</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+                            {/if}
+		    {/foreach}
+        {/foreach}
+	</div>
+	{/if}
+</section> 

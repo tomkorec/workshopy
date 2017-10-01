@@ -11,7 +11,7 @@
 		<form n:name=guestUpForm class=form id="mainForm">
 		{foreach $workshops as $workshop}
 			{php $userCheck = 0;}
-		    {foreach $entries as $entry}
+                        {foreach $entries as $entry}
 		        {if $entry->user_id == $user->id && $entry->workshop_id == $workshop->id}
 		            {php $userCheck++;}
 		        {/if}
@@ -20,8 +20,10 @@
 		<input n:name=occupancy value="{$workshop->occupancy}">
             	<input n:name=capacity value="{$workshop->capacity}">
 
-				<div class="checkbox main">
-					<input type="checkbox" id="checkboxInput{$countUp}" name="sel[]" value={$workshop->id} {if $userCheck > 0 || $workshop->occupancy > $workshop->capacity}disabled{/if}>
+		
+                <div class="checkbox main">
+                       
+					<input type="checkbox" id="checkboxInput{$countUp}" name="sel[]" value="{$workshop->id}" {if $userCheck > 0 || ($workshop->occupancy > $workshop->capacity)}disabled{/if}>
                                         <label for="checkboxInput{$countUp}"><img src="{$basePath}/images/semafor.png"></label>
                                         <span value="{$workshop->price}" class="price"></span>
 				</div>{php $countUp++;}
@@ -38,11 +40,19 @@
 						<h3>{$workshop->name}</h3> {if $userCheck > 0}<span class="subscribed">ZAPSÁNO</span>{/if} {if $workshop->occupancy >= $workshop->capacity}<span class="occupied">OBSAZENO</span>{/if}
 						<p>{$workshop->description}</p>
 					</div>
+                                        <div class="info-panel-mobile">
+						<ul>
+							<li><i class="fa fa-clock-o" aria-hidden="true"></i> {$workshop->time_from|date:'%H:%M'} - {$workshop->time_to|date:'%H:%M'}</li>
+							<li><i class="fa fa-money" aria-hidden="true"></i> {$workshop->price},- Kč</li>
+							<li><i class="fa fa-users" aria-hidden="true"></i>  {$workshop->occupancy}/{$workshop->capacity} 
+							</li>
+						</ul>
+					</div>
 				</div>
 			</div>
                 {/foreach}
 		<div class="submitWorkshops">
-			<span class="totalPrice">Celková cena vybraných workshopů: <strong>0,- Kč</strong></span>
+			<span class="totalPrice">Celková cena vybraných workshopů: <strong>0,-&nbsp;Kč</strong></span>
 			<input n:name=send id="sendForm" disabled type="submit" value="ZÁVAZNĚ SE ZAPSAT">
 		</div>
 		</form>

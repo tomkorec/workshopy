@@ -1,51 +1,40 @@
 {block content}
 <section id="main">
 	<div class="topbar container">
-		<h1>Přihlašování na workshopy</h1>
-		
-		<h2>Ze seznamu níže se vyberte workshopy, kterých se chcete zúčastnit</h2>
+		<h1>Přihlašování na workshopMoje zapsané</h1>
+		<h2>Celková částka: {$currentPrice},- Kč</h2>
 	</div>
 	{if $user->isLoggedIn()}
-            {php $countUp = 0;}
 	<div class="content container">
-		<form n:name=guestUpForm class=form id="mainForm">
 		{foreach $workshops as $workshop}
-			{php $userCheck = 0;}
 		    {foreach $entries as $entry}
 		        {if $entry->user_id == $user->id && $entry->workshop_id == $workshop->id}
-		            {php $userCheck++;}
-		        {/if}
+					<div class="workshopItem">
+						<div class="textContent">
+							<div class="right-panel">
+								<ul>
+									<li><i class="fa fa-clock-o" aria-hidden="true"></i> {$workshop->time_from|date:'%H:%M'} - {$workshop->time_to|date:'%H:%M'}</li>
+									<li><i class="fa fa-money" aria-hidden="true"></i> {$workshop->price},- Kč</li>
+									<li><i class="fa fa-users" aria-hidden="true"></i>  {$workshop->occupancy}/{$workshop->capacity} 
+									</li>
+								</ul>
+							</div>
+							<div class="description">
+								<h3>{$workshop->name}</h3>{/if}
+								<p>{$workshop->description}</p>
+							</div>
+							<div class="info-panel-mobile">
+								<ul>
+									<li><i class="fa fa-clock-o" aria-hidden="true"></i> {$workshop->time_from|date:'%H:%M'} - {$workshop->time_to|date:'%H:%M'}</li>
+									<li><i class="fa fa-money" aria-hidden="true"></i> {$workshop->price},- Kč</li>
+									<li><i class="fa fa-users" aria-hidden="true"></i>  {$workshop->occupancy}/{$workshop->capacity}</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					{/if}
 		    {/foreach}
-			<div class="workshopItem">
-		<input n:name=occupancy value="{$workshop->occupancy}">
-            	<input n:name=capacity value="{$workshop->capacity}">
-                <span value="{$workshop->price}" class="price"></span>
-
-				<div class="checkbox main">
-					<input type="checkbox" id="checkboxInput{$countUp}" name="sel[]" value={$workshop->id} {if $userCheck > 0 || $workshop->occupancy > $workshop->capacity}disabled{/if}>
-                    	                    <label for="checkboxInput{$countUp}"><img src="{$basePath}/images/semafor.png"></label>
-				</div>{php $countUp++;}
-				<div class="textContent">
-					<div class="right-panel">
-						<ul>
-							<li><i class="fa fa-clock-o" aria-hidden="true"></i> {$workshop->time_from|date:'%H:%M'} - {$workshop->time_to|date:'%H:%M'}</li>
-							<li><i class="fa fa-money" aria-hidden="true"></i> {$workshop->price},- Kč</li>
-							<li><i class="fa fa-users" aria-hidden="true"></i>  {$workshop->occupancy}/{$workshop->capacity} 
-							</li>
-						</ul>
-					</div>
-					<div class="description">
-						<h3>{$workshop->name}</h3> {if $userCheck > 0}<span class="subscribed">ZAPSÁNO</span>{/if} {if $workshop->occupancy >= $workshop->capacity}<span class="occupied">OBSAZENO</span>{/if}
-						<p>{$workshop->description}</p>
-					</div>
-				</div>
-			</div>
-                {/foreach}
-		<div class="submitWorkshops">
-			<span class="totalPrice">Celková cena vybraných workshopů: <strong>0,- Kč</strong></span>
-			<input n:name=send id="sendForm" disabled type="submit" value="ZÁVAZNĚ SE ZAPSAT">
-		</div>
-		</form>
+        {/foreach}
 	</div>
 	{/if}
 </section> 

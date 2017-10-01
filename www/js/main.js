@@ -3,16 +3,26 @@ $('#mainForm').click(function(){
         $('#sendForm').removeAttr('disabled');
     } else {
         $('#sendForm').attr("disabled","disabled");   
-    }
-    
-    
+    }    
 });
 
-$('document').on('load',function(){
-   if($('input[type=checkbox]').prop('disabled',true)){
-        $(this).parent('.checkbox').css('visibility','hidden');
-    } 
+function getUrlParameter() {
+    var thisUrl = window.location.href;
+    var myRegexp = /[^&?]*?=([^&?]*)/g;
+    var res = myRegexp.exec(thisUrl);
+    $('#registrationCode').val(res[1]);
+    if(res){
+        setTimeout(submitActivation(),1000);
+    }
+}
+function submitActivation(){
+    $('#submitActiv').click();
+}
+
+$(document).ready(function(){
+    getUrlParameter();
 });
+
 
 var totalPrice = 0;
 $('input[type=checkbox]').change(function(){
