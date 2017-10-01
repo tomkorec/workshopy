@@ -1,6 +1,16 @@
 {block content}
-<h1 n:block=title>Sign Up</h1>
-
-{control signUpForm}
-
-<p><a n:href="in">Already have an account? Log in.</a></p>
+<section id="login">
+	<form n:name=signUpForm>
+		<div class="loginBox">
+			<img src="{$basePath}/images/dudlik.png">
+			<h1>Dudlík fest</h1>
+			<input n:name=username placeholder="Uživatelské jméno" \>
+                        <input n:name=email placeholder="Email"\>
+			<input n:name=password placeholder="Heslo"\>
+			<div class="line-cont">
+				<input n:name=send value="ZAREGISTROVAT SE">
+				<a n:href="in">Již máte účet? Přihlašte se.</a>
+			</div>
+		</div>
+	</form>
+</section>

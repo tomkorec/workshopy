@@ -1,6 +1,13 @@
 {block content}
-Zadejte prosím registrační kód
-<form n:name=registrationConfirm>
-    <input n:name=code>
-    <input n:name=send>
-</form>
+<section id="login">
+	<form n:name=registrationConfirm>
+		<div class="loginBox">
+			<img src="{$basePath}/images/dudlik.png">
+			<h1>Dudlík fest</h1>
+			<input n:name=code placeholder="Registrační kód" \>
+			<div class="line-cont">
+				<input n:name=send value="AKTIVOVAT ÚČET">
+			</div>
+		</div>
+	</form>
+</section>
