@@ -1,6 +1,6 @@
 <?php
-
 namespace App\Presenters;
+
 
 use Nette;
 use App\Forms;
@@ -37,37 +37,36 @@ class HomepagePresenter extends BasePresenter
 		$workshopIds = $form->getHttpData($form::DATA_TEXT | $form::DATA_KEYS, 'sel[]');
                 $workshops = $this->database->table('workshops');
                 $entries = $this->database->table('entries');
-                if($this->user->isLoggedIn()){
+
                     $userId = $this->user->id;
-                    
                     foreach ($workshopIds as $wId){ //srovná nové přírůstky se stávajícími workshopy
                         $newWorkshop = $this->database->table('workshops')->get($wId);
                         $workshopEntries = $entries->where('user_id',$userId);
-                        
+
                         $wsChoosed = $this->database->table('workshops')->get($wId);
-                        
-                        foreach ($workshopIds as $wIdt){
-                            $currentWorkshop = $this->database->table('workshops')->get($wIdt);
-                            if($currentWorkshop->id != $wsChoosed->id){
-                                $result = $this->workshopManager->checkNewOverlap($wsChoosed, $currentWorkshop);
-                               
-                                if($result > 0){
-                                    $this->flashMessage("Časy workshopů ".$newWorkshop
-                                            ->name." a ".$currentWorkshop
-                                            ->name." se překrývají","error");
-                                    $this->redirect('Homepage:');
-                                    break;
+                        if($this->user->isLoggedIn()) {
+                            foreach ($workshopIds as $wIdt) {
+                                $currentWorkshop = $this->database->table('workshops')->get($wIdt);
+                                if ($currentWorkshop->id != $wsChoosed->id) {
+                                    $result = $this->workshopManager->checkNewOverlap($wsChoosed, $currentWorkshop);
+
+                                    if ($result > 0) {
+                                        $this->flashMessage("Časy workshopů " . $newWorkshop
+                                                ->name . " a " . $currentWorkshop
+                                                ->name . " se překrývají", "error");
+                                        $this->redirect('Homepage:');
+                                        break;
+                                    }
+
                                 }
-                                
                             }
                         }
-                        
                         foreach ($workshopEntries as $workshopEntry){
-                            
+
                             $currentWorkshop = $workshops->get($workshopEntry->workshop_id);
                             if($currentWorkshop->id != $workshopEntry->id){
                             $result = $this->workshopManager->checkNewOverlap($newWorkshop, $currentWorkshop);
-                            
+
                             if($result > 0){
                                 $this->flashMessage("Časy workshopů ".$newWorkshop->name." a ".$currentWorkshop->name." se překrývají","error");
                                 $this->redirect('Homepage:');
@@ -76,53 +75,80 @@ class HomepagePresenter extends BasePresenter
                             }
                         }
                     }
-                    
-                    
-                    foreach ($workshopIds as $workshopId){
-                        if($values->capacity <= $values->occupancy){    //check for occupancy limit
-                            $this->flashMessage('Kapacita workshopu byla vyčerpána.','error');
+
+
+                    if(!$this->user->isLoggedIn()){
+                        $users = $this->database->table('users');
+                        $randomVerif = random_int(0,99999999);
+                        $users->insert([
+                            'verification' => $randomVerif,
+                        ]);
+                    }
+                    foreach ($workshopIds as $workshopId) {
+                        if ($values->capacity <= $values->occupancy) {    //check for occupancy limit
+                            $this->flashMessage('Kapacita workshopu byla vyčerpána.', 'error');
                             $this->redirect('Homepage:');
                             break;
                         }
                         $entries = $this->database->table('entries');
                         $checkEntry = 0;
-                        foreach($entries as $entry){
-                            if($entry->user_id == $this->user->id && $entry->workshop_id == $workshopId){   //jde o tentýž wshop?
-                                $checkEntry++;
-                                
+
+                        /*zápis přihlášených*/
+
+
+                        if ($this->user->isLoggedIn()) {
+                            foreach ($entries as $entry) {
+                                if ($entry->user_id == $this->user->id && $entry->workshop_id == $workshopId) {   //jde o tentýž wshop?
+                                    $checkEntry++;
+
+                                }
                             }
+                            if ($checkEntry > 0) {   //check for user already signed
+                                $this->flashMessage('Nelze se zapsat do workshopu, který máte již zapsaný.', 'error');
+                                $this->redirect('Homepage:');
+                                break;
+                            }
+                            $this->database->table('entries')->insert([
+                                'user_id' => $userId,
+                                'workshop_id' => $workshopId,
+                            ]);
+                            $occupancy = $this->database->table('workshops')->get($workshopId)->occupancy;
+                            $occupancy++;
+
+                            $this->database->table('workshops')->get($workshopId)->update([
+                                'occupancy' => $occupancy,
+                            ]);
                         }
-                        if($checkEntry > 0){   //check for user already signed
-                            $this->flashMessage('Nelze se zapsat do workshopu, který máte již zapsaný.','error');
-                            $this->redirect('Homepage:');
-                            break;
+
+                        if(!$this->user->isLoggedIn()){
+                            $newUser = $this->database->table('users')
+                                ->where('verification',$randomVerif)
+                                ->fetch();
+                            $this->database->table('entries')->insert([
+                                'user_id' => $newUser->id,
+                                'workshop_id' => $workshopId,
+                            ]);
+                            $occupancy = $this->database->table('workshops')->get($workshopId)->occupancy;
+                            $occupancy++;
+                            $this->database->table('workshops')->get($workshopId)->update([
+                                'occupancy' => $occupancy,
+                            ]);
                         }
-                        $this->database->table('entries')->insert([
-                        'user_id' => $userId,
-                        'workshop_id' => $workshopId,
-                    ]);
-                        $occupancy = $this->database->table('workshops')->get($workshopId)->occupancy;
-                        $occupancy++;
-                        
-                        $this->database->table('workshops')->get($workshopId)->update([
-                        'occupancy' => $occupancy,
-                    ]);
                     }
-                    $this->flashMessage('Byli jste úspěšně přihlášeni na workshopy','success');
-                }
-                else {
-                    $this->error('Nelze provést - uživatel není přihlášen');
-                }
-		$this->redirect('Homepage:');
+                        if($this->user->isLoggedIn()){
+                            $this->flashMessage('Byli jste úspěšně přihlášeni na workshopy', 'success');
+                            $this->redirect('Homepage:default');
+                        } else{
+                            $this->redirect('Sign:new', array('' => $randomVerif));
+                        }
         }
 
 	public function renderDefault()
 	{
 		$this->template->workshops = $this->database->table('workshops');
                 $this->template->entries = $this->database->table('entries');
-                if(!$this->user->isLoggedIn()){
-                    $this->redirect('Sign:in');
-                }
+        $this->template->workshopManager = $this->workshopManager;
+
 	}
 
         public function renderOverview() {

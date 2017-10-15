@@ -2,10 +2,14 @@
 <section id="main">
 	<div class="topbar container">
 		<h1>Přihlašování na workshopy</h1>
-		
-                <h2>Ze seznamu níže se vyberte workshopy, kterých se chcete zúčastnit</h2>
+			<p>Přijďte se podívat do Skautského Institutu - vstup je ZDARMA!<br>
+				Můžete si například zkusit ošetřit namaskované popáleniny, projít
+				si výstavu Příběhy bláznovství, zastavit se u stánku Lékořice,
+				dobrovolnické organizace a mezitím si odskočit na kafe do kavárny
+				přímo v Institutu.<br>Zároveň budou probíhat workshopy s omezenou
+				kapacitou, na které je potřeba se registrovat níže.<br>V případě,
+				že máte lístek na celý Dudlík fest, máte slevu 20%.</p>
 	</div>
-	{if $user->isLoggedIn()}
             {php $countUp = 0;}
 	<div class="content container">
 		<form n:name=guestUpForm class=form id="mainForm">
@@ -30,20 +34,20 @@
 				<div class="textContent">
 					<div class="right-panel">
 						<ul>
-							<li><i class="fa fa-clock-o" aria-hidden="true"></i> {$workshop->time_from|date:'%H:%M'} - {$workshop->time_to|date:'%H:%M'}</li>
-							<li><i class="fa fa-money" aria-hidden="true"></i> {$workshop->price},- Kč</li>
-							<li><i class="fa fa-users" aria-hidden="true"></i>  {$workshop->occupancy}/{$workshop->capacity} 
+							<li>{if $workshopManager->checkTimeDiff($workshop->time_from,$workshop->time_to)}<i class="fa fa-clock-o" aria-hidden="true"></i> {$workshop->time_from|date:'%H:%M'} - {$workshop->time_to|date:'%H:%M'}{/if}</li>
+							<li><i class="fa fa-money" aria-hidden="true"></i> {if $workshop->price == 0}ZDARMA{else}{$workshop->price},- Kč{/if}</li>
+							<li><i class="fa fa-users" aria-hidden="true"></i>  {if $workshop->capacity == 0}neomezeno{else}{$workshop->occupancy}/{$workshop->capacity}{/if}
 							</li>
 						</ul>
 					</div>
 					<div class="description">
-						<h3>{$workshop->name}</h3> {if $userCheck > 0}<span class="subscribed">ZAPSÁNO</span>{/if} {if $workshop->occupancy >= $workshop->capacity}<span class="occupied">OBSAZENO</span>{/if}
+						<h3>{$workshop->name}</h3> {if $userCheck > 0}<span class="subscribed">ZAPSÁNO</span>{/if} {if $workshop->occupancy >= $workshop->capacity && $workshop->capacity != 0}<span class="occupied">OBSAZENO</span>{/if}
 						<p>{$workshop->description}</p>
 					</div>
                                         <div class="info-panel-mobile">
 						<ul>
 							<li><i class="fa fa-clock-o" aria-hidden="true"></i> {$workshop->time_from|date:'%H:%M'} - {$workshop->time_to|date:'%H:%M'}</li>
-							<li><i class="fa fa-money" aria-hidden="true"></i> {$workshop->price},- Kč</li>
+							<li><i class="fa fa-money" aria-hidden="true"></i> {if $workshop->price == 0}ZDARMA{else}{$workshop->price},- Kč{/if}</li>
 							<li><i class="fa fa-users" aria-hidden="true"></i>  {$workshop->occupancy}/{$workshop->capacity} 
 							</li>
 						</ul>
@@ -57,5 +61,4 @@
 		</div>
 		</form>
 	</div>
-	{/if}
 </section>

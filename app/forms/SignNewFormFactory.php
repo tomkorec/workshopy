@@ -7,7 +7,7 @@ use Nette;
 use Nette\Application\UI\Form;
 
 
-class SignUpFormFactory
+class SignNewFormFactory
 {
 	use Nette\SmartObject;
 
@@ -39,21 +39,16 @@ class SignUpFormFactory
                 $form->addText('name','Zadejte Vaše jméno a příjmení:')
                         ->setRequired('Uveďte prosím své jméno a příjmení')
                         ->addRule($form::PATTERN,'Zadejte prosím celé jméno','(.*\s+.*)');
-
+        $form->addHidden('verification','Verifikace');
 		$form->addEmail('email', 'Váš e-mail:')
 			->setRequired('Prosím zadejte Váš email.');
-
-		$form->addPassword('password', 'Vytvořte heslo:')
-			->setOption('description', sprintf('alespoň %d znaků', self::PASSWORD_MIN_LENGTH))
-			->setRequired('Prosím vytvořte heslo.')
-			->addRule($form::MIN_LENGTH, null, self::PASSWORD_MIN_LENGTH);
 
 		$form->addSubmit('send', 'Zaregistrovat');
 
 		$form->onSuccess[] = function (Form $form, $values) use ($onSuccess) {
                     
                         try {
-				$this->userManager->add($values->username, $values->email, $values->password, $values->name);
+				$this->userManager->addNew($values->username, $values->email, $values->name, $values->verification);
 			} catch (Model\DuplicateNameException $e) {
                                 
 				$form->addError('Uživatelské jméno je již zabrané. Zvolte prosím jiné.');

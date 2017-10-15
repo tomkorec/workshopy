@@ -1,6 +1,7 @@
 navbar()
 	nav
 		.container
+			position relative
 			+below('xl')
 				padding-left 20px
 				padding-right 20px
@@ -9,11 +10,22 @@ navbar()
 		background-color white
 		color shady
 		links()
-		box-shadow()
+		box-shadowed()
 		.navTitle
 			font-size 24px
 			font-weight bold
 			float left
+			margin-right 30px
+		.navLinks
+			links()
+			+below('m')
+				display none
+			a
+				font-size 17px
+				margin-left 50px
+				font-weight 600
+				display inline
+				line-height 70px
 		.loginBar
 			float right
 			font-size 17px
@@ -23,17 +35,17 @@ main()
 	margin-top 80px
 	color shady
 	.topbar
+		background-color white
 		+below('m')
 			padding-left 20px
 			padding-right 20px
-		background-color white
-		box-shadow()
+		box-shadowed()
 		margin-bottom 10px
 		h1
 			font-size 35px
 			font-weight 300
 			text-align center
-			margin-top 40px
+			padding-top 40px
 			margin-bottom 0
 			font-family 'Open Sans'
 			text-rendering optimizeLegibility
@@ -44,10 +56,38 @@ main()
 			margin-top 40px
 			margin-bottom 40px
 			text-rendering optimizeLegibility
+		p
+			center(780px)
+			font-style italic
+			text-align center
+			color tighty
+			padding 20px 0
 			
-			
+	.stats
+		padding 20px
+		.stats-col
+			col(1/3)
+			+below('m')
+				col(1)
+			border-radius 20px
+			border 1px solid shady
+			font-weight 300
+			text-align center
+			padding 10px
+			margin-bottom 20px
+			.title
+				font-size 18px
+				text-align center
+			.value
+				font-size 40px
+				text-align center
 	.content
-		box-shadow()
+		links()
+		a
+			font-weight 600
+			color green
+		a:hover
+			text-decoration underline
 		+below('m')
 			padding-left 20px
 			padding-right 20px
@@ -56,8 +96,13 @@ main()
 			transition()
 		.workshopItem
 			transition()
+			background-color white
+			margin-bottom 10px
 			padding-bottom 20px
+			box-shadowed()
 			color shady
+			.red
+				color red
 			checkbox()
 			padding 30px
 			.textContent
@@ -112,8 +157,6 @@ main()
 							list-style-type none
 							padding 5px 0 5px 60px
 							margin 0
-						
-		background-color white
 		input[type=checkbox]
 			float left
 		h3
@@ -127,6 +170,10 @@ main()
 				line-height 40px
 				margin-right 0
 				text-align right
+		h4
+			font-size 21px
+			font-weight 300
+			margin-bottom 15px
 		.subscribed
 			background-color green
 			color white
@@ -161,6 +208,30 @@ main()
 			font-weight 300
 			strong
 				font-weight 400
+		.loggedUsers
+			table
+				width 100%
+				th,td
+					text-align left
+					vertical-align middle
+					font-size 15px
+					line-height 24px
+				tr:nth-child(odd)
+					background rgb(250,250,250)
+				tr:nth-child(odd)
+					background white
+admin()
+	.content
+		background-color transparent
+		box-shadowed(0)
+		.workshopItem
+			background-color white
+			.description
+				padding-left 0
+			box-shadowed()
+			margin-bottom 10px
+
+
 
 @keyframes pulse {
 			0% {
@@ -172,6 +243,9 @@ main()
 		}
 
 loginBg()
+	div.flash
+		margin-top -100px
+		
 	background url(../images/bg.png)
 	+below('m')
 		background #8A3A41
@@ -186,17 +260,38 @@ loginBg()
 	animation-iteration-count infinite
 login()
 	//background-color red
+
 	.loginBox
 		center(480px)
-		height 640px
+		padding-top 40px
+		.errors
+			margin 0
+			-webkit-padding-start 0	
+			li
+				font-family 'Open Sans'
+				display block
+				line-height 30px
+				text-align center
+				list-style-type none
+				color #ff9090
+				padding 5px 0
+				margin 0
+				
+		//height 640px
 		background-color rgba(255,255,255,0.2)
 		+below('m')
 			background-color rgba(255,255,255,0)
 			padding-left 20px
 			padding-right 20px
+		span.hint
+			text-align center
+			display block
+			font-size 18px
+			padding 20px 0
+			color white
 		img
 			center(169px)
-			margin-top 80px
+			padding-top 40px
 		h1
 			font-size 35px
 			font-weight bold
@@ -221,6 +316,7 @@ login()
 			padding-left 10px
 			margin-bottom 10px
 			transition()
+		
 		input[type=text]:focus,input[type=password]:focus,input[type=email]:focus
 			border-color rgba(255,255,255,1)
 			transition()
@@ -234,6 +330,10 @@ login()
 			color rgba(255,255,255,0.5)
 		.line-cont
 			center(300px)
+			padding-bottom 20px
+		.errorInput
+			border-color rgba(255,144,144,1)
+			border 1px dashed
 		checkbox()
 		.realLabel
 			font-size 15px
@@ -247,7 +347,7 @@ login()
 			color rgba(255,255,255,0.5)
 		a:hover
 			color rgba(255,255,255,1)
-			
+
 div.flash
 	color black
 	background #FFF9D7
@@ -262,12 +362,20 @@ div.flash.error
 div.flash.success
 	background-color lightGreen
 	border 1px solid green
-	
+div.flash.info
+	background-color lightBlue
+	border 1px solid blue
+
 footer()
 	position absolute
 	right 0
 	bottom 0
 	left 0
+	links()
+	a
+		font-weight 800
+	span.year
+		float right
 	height 40px
 	line-height 40px
 	background-color white

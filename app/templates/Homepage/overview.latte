@@ -1,5 +1,5 @@
 {block content}
-<section id="main">
+<section id="main" xmlns="http://www.w3.org/1999/html">
 	<div class="topbar container">
 		<h1>Moje zapsané</h1>
 		<h2>Celková částka: {$currentPrice},- Kč</h2>
@@ -32,9 +32,16 @@
 							</div>
 						</div>
 					</div>
-                            {/if}
+					{/if}
 		    {/foreach}
         {/foreach}
+		<div class="workshopItem">
+			<div class="description">
+				<p class="red">Pokud si přejete nějaký z workshopů odhlásit, kontaktujte nás prosím na emailové adrese
+				<strong>tomas.korec@cesta-ven.cz</strong><br>a my Vám zápis do workshopu zrušíme. Je tak možné učinit
+					nejpozději do <strong>22.10. 22:00</strong>.</p>
+			</div>
+		</div>
 	</div>
 	{/if}
 </section> 

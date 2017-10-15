@@ -23,17 +23,28 @@
         {if $presenter->name != 'Sign' && $presenter->name != 'User'}
         <section id="navbar">
                 <nav>
-                        <div class="container">
-                            <div class="navTitle"><a n:href=Homepage:default>Workshopy</a></div>
-                                <div class="loginBar"><a href="#" class="dropbtn" onclick="showDropdown()"><i class="fa fa-user-circle" onclick="showDropdown()" aria-hidden="true"></i> {if $user->isLoggedIn()}{$user->identity->data['username']}{else}Nepřihlášen{/if}</a></div>
+                    <div class="container">
+                        <div class="navTitle"><a n:href=Homepage:default>Workshopy</a></div>
+                        <div class="loginBar"><a href="#" class="dropbtn" onclick="showDropdown()"><i class="fa fa-user-circle" onclick="showDropdown()" aria-hidden="true"></i> {if $user->isLoggedIn()}{$user->identity->data['username']}{else}Nepřihlášen{/if}</a></div>
                         <div id="myDropdown" class="dropdown-content">
+                                <a n:href="Homepage:overview" class="mbl">Přihlášené</a>
+                                <a n:href="Homepage:about" class="mbl">O workshopech</a>
+                                <a href="http://cesta-ven.cz/cs/dudlikfest/aktualni-rocnik/" class="mbl" target="_blank">Dudlík Fest</a>
                                 {if $user->isLoggedIn()}
-                                    <a n:href="Homepage:overview">Přihlášené workshopy</a>
-                                    <a href="#">Nastavení</a>
+
+                                    <a n:href="User:password">Nastavení</a>
+                                    {if $user->isInRole('admin')}
+                                    <a n:href="Admin:default">Přehledy</a>
+                                    {/if}
                                     <a n:href="Sign:out">Odhlásit se</a>
                                 {else}
                                     <a n:href="Sign:in">Přihlásit se</a>
                                 {/if}
+                        </div>
+                        <div class="navLinks">
+                            <a n:href="Homepage:overview">Přihlášené</a>
+                            <a n:href="Homepage:about">O workshopech</a>
+                            <a href="http://cesta-ven.cz/cs/dudlikfest/aktualni-rocnik/" target="_blank">Dudlík Fest</a>
                         </div>
                         </div>
                 </nav>
@@ -41,7 +52,12 @@
         {/if}
 	{include content}
         {if $presenter->name != 'Sign' && $presenter->name != 'User'}
-        <footer>footer</footer>
+        <footer>
+            <div class="container">
+                <span class="year">&copy; T.K. 2017</span>
+                <a href="http://cesta-ven.cz">Cesta ven, z.s.</a>
+            </div>
+        </footer>
         {/if}
 	{block scripts}
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>

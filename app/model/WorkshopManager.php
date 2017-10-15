@@ -46,12 +46,21 @@ class WorkshopManager
             }
         }
 
-                public  function checkTimeOverlap($start_date_last, $end_date_last, $start_date_next, $end_date_next){
+        public  function checkTimeOverlap($start_date_last, $end_date_last, $start_date_next, $end_date_next){
                     if($start_date_last <= $end_date_next && $end_date_last >= $start_date_next){
                 return 1;
             }
             else {
                 return 0;
+            }
+        }
+
+        public function checkTimeDiff($start_date, $end_date){
+            if($start_date == $end_date){
+                return 0;
+            }
+            else{
+                return 1;
             }
         }
 	

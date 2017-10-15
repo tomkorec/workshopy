@@ -1,0 +1,73 @@
+{block content}
+    <section id="main" class="admin">
+        {if $user->isInRole('admin')}
+        <div class="topbar container">
+            <h1>Přehled workshopů</h1>
+            <div class="stats">
+                <div class="stats-col">
+                    <div class="value">{$wCount}</div>
+                    <div class="title">workshopů</div>
+                </div>
+                <div class="stats-col">
+                    <div class="value">{$eCount}</div>
+                    <div class="title">zapsaných účastníků</div>
+                </div>
+                <div class="stats-col">
+                    <div class="value">{$uCount}</div>
+                    <div class="title">registrovaných uživatelů</div>
+                </div>
+            </div>
+        </div>
+            <div class="content container">
+            {foreach $workshops as $workshop}
+                <div class="workshopItem">
+                    <div class="textContent">
+                        <div class="right-panel">
+                            <ul>
+                                <li><i class="fa fa-clock-o" aria-hidden="true"></i> {$workshop->time_from|date:'%H:%M'} - {$workshop->time_to|date:'%H:%M'}</li>
+                                <li><i class="fa fa-money" aria-hidden="true"></i> {$workshop->price},- Kč</li>
+                                <li><i class="fa fa-users" aria-hidden="true"></i>  {$workshop->occupancy}/{$workshop->capacity}</li>
+                            </ul>
+                        </div>
+                        <div class="description">
+                            <h3>{$workshop->name}</h3>
+                            <p>{$workshop->description}</p>
+                        </div>
+                        <div class="info-panel-mobile">
+                            <ul>
+                                <li><i class="fa fa-clock-o" aria-hidden="true"></i> {$workshop->time_from|date:'%H:%M'} - {$workshop->time_to|date:'%H:%M'}</li>
+                                <li><i class="fa fa-money" aria-hidden="true"></i> {$workshop->price},- Kč</li>
+                                <li><i class="fa fa-users" aria-hidden="true"></i>  {$workshop->occupancy}/{$workshop->capacity}</li>
+                            </ul>
+                        </div>
+                        <div class="loggedUsers">
+                            <h4>Přihlášení účastníci</h4>
+                            <table>
+                                <tr>
+                                    <th>Jméno</th>
+                                    <th>Uživatelské jméno</th>
+                                    <th>Email</th>
+                                    <th>Datum registrace</th>
+                                </tr>
+                            {foreach $entries->where('workshop_id',$workshop->id) as $entry}
+                                <tr>
+                                    <td>{$users->get($entry->user_id)->name}</td>
+                                    <td>{$users->get($entry->user_id)->username}</td>
+                                    <td>{$users->get($entry->user_id)->email}</td>
+                                    <td>{$users->get($entry->user_id)->created_at|date:'%d.%m.%Y, %k:%M'}</td>
+                                </tr>
+                            {/foreach}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            {/foreach}  
+            </div>
+        {else}
+            <div class="content container">
+                <div class="workshopItem">
+                    <p style="text-align: center;">Pro přístup do této sekce nemáte potřebná oprávnění.</p>
+                </div>
+            </div>
+        {/if}
+    </section>

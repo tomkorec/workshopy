@@ -15,6 +15,10 @@ div.flash.success {
   background-color: #dfffd8;
   border: 1px solid #4fb957;
 }
+div.flash.info {
+  background-color: #d8fbff;
+  border: 1px solid #4fa9b9;
+}
 @-moz-keyframes pulse {
   0% {
     filter: hue-rotate(0deg);
@@ -80,6 +84,9 @@ body.bodyBg {
   background-repeat: no-repeat;
   animation-iteration-count: infinite;
 }
+body.bodyBg div.flash {
+  margin-top: -100px;
+}
 @media only screen and (max-width: 800px) {
   body.bodyBg {
     background: #8a3a41;
@@ -91,7 +98,6 @@ body.bodyBg {
   }
 }
 .container {
-  *zoom: 1;
   width: auto;
   max-width: 960px;
   float: none;
@@ -101,12 +107,9 @@ body.bodyBg {
   padding-left: 0;
   padding-right: 0;
 }
-.container:before,
-.container:after {
+.container::after {
   content: '';
   display: table;
-}
-.container:after {
   clear: both;
 }
 section#navbar nav {
@@ -116,6 +119,9 @@ section#navbar nav {
   color: #5a5a5a;
   -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,0.17);
   box-shadow: 0 1px 1px 0 rgba(0,0,0,0.17);
+}
+section#navbar nav .container {
+  position: relative;
 }
 @media only screen and (max-width: 1800px) {
   section#navbar nav .container {
@@ -142,7 +148,6 @@ section#navbar nav input[type=submit] {
   -webkit-appearance: none;
   line-height: 40px;
   height: 40px;
-  *zoom: 1;
   width: auto;
   max-width: 300px;
   float: none;
@@ -167,15 +172,10 @@ section#navbar nav input[type=submit] {
   -o-transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
   transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
 }
-section#navbar nav a.btn:before,
-section#navbar nav input[type=submit]:before,
-section#navbar nav a.btn:after,
-section#navbar nav input[type=submit]:after {
+section#navbar nav a.btn::after,
+section#navbar nav input[type=submit]::after {
   content: '';
   display: table;
-}
-section#navbar nav a.btn:after,
-section#navbar nav input[type=submit]:after {
   clear: both;
 }
 @media only screen and (max-width: 800px) {
@@ -210,6 +210,96 @@ section#navbar nav .navTitle {
   font-size: 24px;
   font-weight: bold;
   float: left;
+  margin-right: 30px;
+}
+section#navbar nav .navLinks a {
+  text-decoration: none;
+  color: #5a5a5a;
+  -webkit-transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+  -moz-transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+  -ms-transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+  -o-transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+  transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+  -webkit-appearance: none;
+}
+section#navbar nav .navLinks a:hover {
+  color: #3c3c3c;
+}
+section#navbar nav .navLinks a.btn,
+section#navbar nav .navLinks input[type=submit] {
+  background-color: #4fb957;
+  -webkit-appearance: none;
+  line-height: 40px;
+  height: 40px;
+  width: auto;
+  max-width: 300px;
+  float: none;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 0;
+  padding-right: 0;
+  width: 300px;
+  display: block;
+  color: #fff;
+  font-size: 15px;
+  font-weight: bold;
+  text-rendering: optimizeLegibility;
+  font-family: 'Open Sans';
+  cursor: pointer;
+  outline: none;
+  border: none;
+  -webkit-transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+  -moz-transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+  -ms-transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+  -o-transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+  transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+}
+section#navbar nav .navLinks a.btn::after,
+section#navbar nav .navLinks input[type=submit]::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+@media only screen and (max-width: 800px) {
+  section#navbar nav .navLinks a.btn,
+  section#navbar nav .navLinks input[type=submit] {
+    width: 100%;
+  }
+}
+section#navbar nav .navLinks a.btn:hover,
+section#navbar nav .navLinks input[type=submit]:hover {
+  filter: brightness(110%);
+  -webkit-transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+  -moz-transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+  -ms-transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+  -o-transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+  transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+}
+section#navbar nav .navLinks a.btn:hover,
+section#navbar nav .navLinks input[type=submit]:active {
+  filter: brightness(90%);
+  -webkit-transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+  -moz-transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+  -ms-transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+  -o-transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+  transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+}
+section#navbar nav .navLinks a.btn:hover,
+section#navbar nav .navLinks input[type=submit]:disabled {
+  filter: grayscale(100%);
+}
+@media only screen and (max-width: 800px) {
+  section#navbar nav .navLinks {
+    display: none;
+  }
+}
+section#navbar nav .navLinks a {
+  font-size: 17px;
+  margin-left: 50px;
+  font-weight: 600;
+  display: inline;
+  line-height: 70px;
 }
 section#navbar nav .loginBar {
   float: right;
@@ -224,17 +314,23 @@ section#navbar nav .dropdown-content {
   line-height: 20px;
   overflow: auto;
   float: right;
-  position: relative;
+  position: absolute;
   top: 70px;
-  right: -100px;
-  -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,0.17);
-  box-shadow: 0 1px 1px 0 rgba(0,0,0,0.17);
+  right: 0;
+  box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.2) !important;
+  -webkit-box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.2) !important;
+}
+section#navbar nav .dropdown-content .mbl {
+  display: none;
 }
 @media only screen and (max-width: 800px) {
   section#navbar nav .dropdown-content {
     position: absolute;
     width: 100%;
     left: 0;
+  }
+  section#navbar nav .dropdown-content .mbl {
+    display: block;
   }
 }
 section#navbar nav .dropdown-content a {
@@ -269,7 +365,7 @@ section#main .topbar h1 {
   font-size: 35px;
   font-weight: 300;
   text-align: center;
-  margin-top: 40px;
+  padding-top: 40px;
   margin-bottom: 0;
   font-family: 'Open Sans';
   text-rendering: optimizeLegibility;
@@ -282,10 +378,127 @@ section#main .topbar h2 {
   margin-bottom: 40px;
   text-rendering: optimizeLegibility;
 }
-section#main .content {
-  -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,0.17);
-  box-shadow: 0 1px 1px 0 rgba(0,0,0,0.17);
-  background-color: #fff;
+section#main .topbar p {
+  width: auto;
+  max-width: 780px;
+  float: none;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 0;
+  padding-right: 0;
+  font-style: italic;
+  text-align: center;
+  color: #969696;
+  padding: 20px 0;
+}
+section#main .topbar p::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+section#main .stats {
+  padding: 20px;
+}
+section#main .stats .stats-col {
+  border-radius: 20px;
+  border: 1px solid #5a5a5a;
+  font-weight: 300;
+  text-align: center;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+section#main .stats .stats-col .title {
+  font-size: 18px;
+  text-align: center;
+}
+section#main .stats .stats-col .value {
+  font-size: 40px;
+  text-align: center;
+}
+section#main .content a {
+  text-decoration: none;
+  color: #5a5a5a;
+  -webkit-transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+  -moz-transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+  -ms-transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+  -o-transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+  transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+  -webkit-appearance: none;
+}
+section#main .content a:hover {
+  color: #3c3c3c;
+}
+section#main .content a.btn,
+section#main .content input[type=submit] {
+  background-color: #4fb957;
+  -webkit-appearance: none;
+  line-height: 40px;
+  height: 40px;
+  width: auto;
+  max-width: 300px;
+  float: none;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 0;
+  padding-right: 0;
+  width: 300px;
+  display: block;
+  color: #fff;
+  font-size: 15px;
+  font-weight: bold;
+  text-rendering: optimizeLegibility;
+  font-family: 'Open Sans';
+  cursor: pointer;
+  outline: none;
+  border: none;
+  -webkit-transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+  -moz-transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+  -ms-transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+  -o-transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+  transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+}
+section#main .content a.btn::after,
+section#main .content input[type=submit]::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+@media only screen and (max-width: 800px) {
+  section#main .content a.btn,
+  section#main .content input[type=submit] {
+    width: 100%;
+  }
+}
+section#main .content a.btn:hover,
+section#main .content input[type=submit]:hover {
+  filter: brightness(110%);
+  -webkit-transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+  -moz-transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+  -ms-transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+  -o-transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+  transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+}
+section#main .content a.btn:hover,
+section#main .content input[type=submit]:active {
+  filter: brightness(90%);
+  -webkit-transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+  -moz-transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+  -ms-transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+  -o-transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+  transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+}
+section#main .content a.btn:hover,
+section#main .content input[type=submit]:disabled {
+  filter: grayscale(100%);
+}
+section#main .content a {
+  font-weight: 600;
+  color: #4fb957;
+}
+section#main .content a:hover {
+  text-decoration: underline;
 }
 @media only screen and (max-width: 800px) {
   section#main .content {
@@ -307,9 +520,16 @@ section#main .content .workshopItem {
   -ms-transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
   -o-transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
   transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+  background-color: #fff;
+  margin-bottom: 10px;
   padding-bottom: 20px;
+  -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,0.17);
+  box-shadow: 0 1px 1px 0 rgba(0,0,0,0.17);
   color: #5a5a5a;
   padding: 30px;
+}
+section#main .content .workshopItem .red {
+  color: #b9514f;
 }
 section#main .content .workshopItem input[type=checkbox] {
   visibility: hidden;
@@ -509,6 +729,11 @@ section#main .content h3 {
     text-align: right;
   }
 }
+section#main .content h4 {
+  font-size: 21px;
+  font-weight: 300;
+  margin-bottom: 15px;
+}
 section#main .content .subscribed {
   background-color: #4fb957;
   color: #fff;
@@ -548,7 +773,6 @@ section#main .content .submitWorkshops input[type=submit] {
   -webkit-appearance: none;
   line-height: 40px;
   height: 40px;
-  *zoom: 1;
   width: auto;
   max-width: 300px;
   float: none;
@@ -573,15 +797,10 @@ section#main .content .submitWorkshops input[type=submit] {
   -o-transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
   transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
 }
-section#main .content .submitWorkshops a.btn:before,
-section#main .content .submitWorkshops input[type=submit]:before,
-section#main .content .submitWorkshops a.btn:after,
-section#main .content .submitWorkshops input[type=submit]:after {
+section#main .content .submitWorkshops a.btn::after,
+section#main .content .submitWorkshops input[type=submit]::after {
   content: '';
   display: table;
-}
-section#main .content .submitWorkshops a.btn:after,
-section#main .content .submitWorkshops input[type=submit]:after {
   clear: both;
 }
 @media only screen and (max-width: 800px) {
@@ -641,8 +860,37 @@ section#main .content .totalPrice {
 section#main .content .totalPrice strong {
   font-weight: 400;
 }
+section#main .content .loggedUsers table {
+  width: 100%;
+}
+section#main .content .loggedUsers table th,
+section#main .content .loggedUsers table td {
+  text-align: left;
+  vertical-align: middle;
+  font-size: 15px;
+  line-height: 24px;
+}
+section#main .content .loggedUsers table tr:nth-child(odd) {
+  background: #fafafa;
+}
+section#main .content .loggedUsers table tr:nth-child(odd) {
+  background: #fff;
+}
+section#main.admin .content {
+  background-color: transparent;
+  -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,0);
+  box-shadow: 0 1px 1px 0 rgba(0,0,0,0);
+}
+section#main.admin .content .workshopItem {
+  background-color: #fff;
+  -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,0.17);
+  box-shadow: 0 1px 1px 0 rgba(0,0,0,0.17);
+  margin-bottom: 10px;
+}
+section#main.admin .content .workshopItem .description {
+  padding-left: 0;
+}
 section#login .loginBox {
-  *zoom: 1;
   width: auto;
   max-width: 480px;
   float: none;
@@ -651,16 +899,27 @@ section#login .loginBox {
   margin-left: auto;
   padding-left: 0;
   padding-right: 0;
-  height: 640px;
+  padding-top: 40px;
   background-color: rgba(255,255,255,0.2);
 }
-section#login .loginBox:before,
-section#login .loginBox:after {
+section#login .loginBox::after {
   content: '';
   display: table;
-}
-section#login .loginBox:after {
   clear: both;
+}
+section#login .loginBox .errors {
+  margin: 0;
+  -webkit-padding-start: 0;
+}
+section#login .loginBox .errors li {
+  font-family: 'Open Sans';
+  display: block;
+  line-height: 30px;
+  text-align: center;
+  list-style-type: none;
+  color: #ff9090;
+  padding: 5px 0;
+  margin: 0;
 }
 @media only screen and (max-width: 800px) {
   section#login .loginBox {
@@ -669,8 +928,14 @@ section#login .loginBox:after {
     padding-right: 20px;
   }
 }
+section#login .loginBox span.hint {
+  text-align: center;
+  display: block;
+  font-size: 18px;
+  padding: 20px 0;
+  color: #fff;
+}
 section#login .loginBox img {
-  *zoom: 1;
   width: auto;
   max-width: 169px;
   float: none;
@@ -679,14 +944,11 @@ section#login .loginBox img {
   margin-left: auto;
   padding-left: 0;
   padding-right: 0;
-  margin-top: 80px;
+  padding-top: 40px;
 }
-section#login .loginBox img:before,
-section#login .loginBox img:after {
+section#login .loginBox img::after {
   content: '';
   display: table;
-}
-section#login .loginBox img:after {
   clear: both;
 }
 section#login .loginBox h1 {
@@ -701,7 +963,6 @@ section#login .loginBox h1 {
 section#login .loginBox input[type=text],
 section#login .loginBox input[type=password],
 section#login .loginBox input[type=email] {
-  *zoom: 1;
   width: auto;
   max-width: 300px;
   float: none;
@@ -727,18 +988,11 @@ section#login .loginBox input[type=email] {
   -o-transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
   transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
 }
-section#login .loginBox input[type=text]:before,
-section#login .loginBox input[type=password]:before,
-section#login .loginBox input[type=email]:before,
-section#login .loginBox input[type=text]:after,
-section#login .loginBox input[type=password]:after,
-section#login .loginBox input[type=email]:after {
+section#login .loginBox input[type=text]::after,
+section#login .loginBox input[type=password]::after,
+section#login .loginBox input[type=email]::after {
   content: '';
   display: table;
-}
-section#login .loginBox input[type=text]:after,
-section#login .loginBox input[type=password]:after,
-section#login .loginBox input[type=email]:after {
   clear: both;
 }
 @media only screen and (max-width: 800px) {
@@ -771,7 +1025,6 @@ section#login .loginBox :-moz-input-placeholder {
   color: rgba(255,255,255,0.5);
 }
 section#login .loginBox .line-cont {
-  *zoom: 1;
   width: auto;
   max-width: 300px;
   float: none;
@@ -780,14 +1033,16 @@ section#login .loginBox .line-cont {
   margin-left: auto;
   padding-left: 0;
   padding-right: 0;
+  padding-bottom: 20px;
 }
-section#login .loginBox .line-cont:before,
-section#login .loginBox .line-cont:after {
+section#login .loginBox .line-cont::after {
   content: '';
   display: table;
-}
-section#login .loginBox .line-cont:after {
   clear: both;
+}
+section#login .loginBox .errorInput {
+  border-color: #ff9090;
+  border: 1px dashed;
 }
 section#login .loginBox input[type=checkbox] {
   visibility: hidden;
@@ -924,7 +1179,6 @@ section#login .loginBox input[type=submit] {
   -webkit-appearance: none;
   line-height: 40px;
   height: 40px;
-  *zoom: 1;
   width: auto;
   max-width: 300px;
   float: none;
@@ -949,15 +1203,10 @@ section#login .loginBox input[type=submit] {
   -o-transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
   transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
 }
-section#login .loginBox a.btn:before,
-section#login .loginBox input[type=submit]:before,
-section#login .loginBox a.btn:after,
-section#login .loginBox input[type=submit]:after {
+section#login .loginBox a.btn::after,
+section#login .loginBox input[type=submit]::after {
   content: '';
   display: table;
-}
-section#login .loginBox a.btn:after,
-section#login .loginBox input[type=submit]:after {
   clear: both;
 }
 @media only screen and (max-width: 800px) {
@@ -1007,6 +1256,89 @@ footer {
   line-height: 40px;
   background-color: #fff;
   color: #969696;
+}
+footer a {
+  text-decoration: none;
+  color: #5a5a5a;
+  -webkit-transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+  -moz-transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+  -ms-transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+  -o-transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+  transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+  -webkit-appearance: none;
+}
+footer a:hover {
+  color: #3c3c3c;
+}
+footer a.btn,
+footer input[type=submit] {
+  background-color: #4fb957;
+  -webkit-appearance: none;
+  line-height: 40px;
+  height: 40px;
+  width: auto;
+  max-width: 300px;
+  float: none;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 0;
+  padding-right: 0;
+  width: 300px;
+  display: block;
+  color: #fff;
+  font-size: 15px;
+  font-weight: bold;
+  text-rendering: optimizeLegibility;
+  font-family: 'Open Sans';
+  cursor: pointer;
+  outline: none;
+  border: none;
+  -webkit-transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+  -moz-transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+  -ms-transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+  -o-transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+  transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+}
+footer a.btn::after,
+footer input[type=submit]::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+@media only screen and (max-width: 800px) {
+  footer a.btn,
+  footer input[type=submit] {
+    width: 100%;
+  }
+}
+footer a.btn:hover,
+footer input[type=submit]:hover {
+  filter: brightness(110%);
+  -webkit-transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+  -moz-transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+  -ms-transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+  -o-transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+  transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+}
+footer a.btn:hover,
+footer input[type=submit]:active {
+  filter: brightness(90%);
+  -webkit-transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+  -moz-transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+  -ms-transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+  -o-transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+  transition: all 300ms cubic-bezier(0.66, 0.44, 0.45, 0.61);
+}
+footer a.btn:hover,
+footer input[type=submit]:disabled {
+  filter: grayscale(100%);
+}
+footer a {
+  font-weight: 800;
+}
+footer span.year {
+  float: right;
 }
 footer .left {
   float: left;

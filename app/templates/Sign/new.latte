@@ -1,0 +1,23 @@
+{block content}
+<section id="login">
+    <form n:name=signNewForm autocomplete="off">
+        <div class="loginBox">
+            <input type="text" style="display:none">
+            <input type="password" style="display:none">
+            <span  class="hint">Pro dokončení zápisu zadejte prosím své údaje</span>
+            <input n:name=name placeholder="Jméno a příjmení"\>
+            <input n:name=verification id="verification"\>
+            <input n:name=username {if $form->hasErrors()}class="errorInput"{/if} placeholder="Uživatelské jméno" \>
+            <input n:name=email placeholder="Email" autocomplete="off"\>
+            <div class="line-cont">
+                <input n:name=send value="DOKONČIT ZÁPIS">
+                <ul class="errors" n:if="$form->hasErrors()">
+                    <li n:foreach="$form->errors as $error">{$error}</li>
+                </ul>
+            </div>
+
+
+        </div>
+    </form>
+</section>
+{*$verificationParam =  $this->httpRequest->getQuery('codeid');*}

@@ -1,16 +1,24 @@
 {block content}
 <section id="login">
-	<form n:name=signUpForm>
+	<form n:name=signUpForm autocomplete="off">
 		<div class="loginBox">
-			<img src="{$basePath}/images/dudlik.png">
+			<input type="text" style="display:none">
+                        <input type="password" style="display:none">
+                        <img src="{$basePath}/images/dudlik.png">
 			<h1>Dudlík fest</h1>
-			<input n:name=username placeholder="Uživatelské jméno" \>
-                        <input n:name=email placeholder="Email"\>
-			<input n:name=password placeholder="Heslo"\>
+			<input n:name=name placeholder="Jméno a příjmení"\>
+                        <input n:name=username {if $form->hasErrors()}class="errorInput"{/if} placeholder="Uživatelské jméno" \>
+                        <input n:name=email placeholder="Email" autocomplete="off"\>
+			<input n:name=password placeholder="Heslo" autocomplete="off"\>
 			<div class="line-cont">
 				<input n:name=send value="ZAREGISTROVAT SE">
 				<a n:href="in">Již máte účet? Přihlašte se.</a>
-			</div>
+                                <ul class="errors" n:if="$form->hasErrors()">
+                                    <li n:foreach="$form->errors as $error">{$error}</li>
+                            </ul>
+                        </div>
+                        
+                        
 		</div>
 	</form>
 </section>

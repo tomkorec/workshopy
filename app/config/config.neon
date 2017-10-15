@@ -20,6 +20,7 @@ services:
 	- App\Forms\FormFactory
 	- App\Forms\SignInFormFactory
 	- App\Forms\SignUpFormFactory
+	- App\Forms\SignNewFormFactory
 	- App\Forms\GuestUpFormFactory
 	mailer: Nette\Mail\SmtpMailer
 	router: App\RouterFactory::createRouter

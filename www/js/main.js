@@ -6,6 +6,13 @@ $('#mainForm').click(function(){
     }    
 });
 
+function getRestoreCode() {
+    var thisUrl = window.location.href;
+    var myRegexp = /[^&?]*?=([^&?]*)/g;
+    var res = myRegexp.exec(thisUrl);
+    $('#restoreCode').val(res[1]);
+}
+
 function getUrlParameter() {
     var thisUrl = window.location.href;
     var myRegexp = /[^&?]*?=([^&?]*)/g;
@@ -20,9 +27,15 @@ function submitActivation(){
 }
 
 $(document).ready(function(){
+    getRestoreCode();
     getUrlParameter();
 });
 
+$(document).ready(function () {
+    var  results = window.location.href;
+    results = results.split('=');
+    $('#verification').val(results[1]);
+});
 
 var totalPrice = 0;
 $('input[type=checkbox]').change(function(){
