@@ -2,7 +2,7 @@
 <section id="main" xmlns="http://www.w3.org/1999/html">
 	<div class="topbar container">
 		<h1>Moje zapsané</h1>
-		<h2>Celková částka: {$currentPrice},- Kč</h2>
+		<h2>níže naleznete Vaše zapsané workshopy</h2>
 	</div>
 	{if $user->isLoggedIn()}
 	<div class="content container">
@@ -14,7 +14,6 @@
 							<div class="right-panel">
 								<ul>
 									<li><i class="fa fa-clock-o" aria-hidden="true"></i> {$workshop->time_from|date:'%H:%M'} - {$workshop->time_to|date:'%H:%M'}</li>
-									<li><i class="fa fa-money" aria-hidden="true"></i> {$workshop->price},- Kč</li>
 									<li><i class="fa fa-users" aria-hidden="true"></i>  {$workshop->occupancy}/{$workshop->capacity} 
 									</li>
 								</ul>
@@ -26,7 +25,6 @@
 							<div class="info-panel-mobile">
 								<ul>
 									<li><i class="fa fa-clock-o" aria-hidden="true"></i> {$workshop->time_from|date:'%H:%M'} - {$workshop->time_to|date:'%H:%M'}</li>
-									<li><i class="fa fa-money" aria-hidden="true"></i> {$workshop->price},- Kč</li>
 									<li><i class="fa fa-users" aria-hidden="true"></i>  {$workshop->occupancy}/{$workshop->capacity}</li>
 								</ul>
 							</div>
