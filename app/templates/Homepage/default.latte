@@ -35,7 +35,6 @@
 					<div class="right-panel">
 						<ul>
 							<li>{if $workshopManager->checkTimeDiff($workshop->time_from,$workshop->time_to)}<i class="fa fa-clock-o" aria-hidden="true"></i> {$workshop->time_from|date:'%H:%M'} - {$workshop->time_to|date:'%H:%M'}{/if}</li>
-							<li><i class="fa fa-money" aria-hidden="true"></i> {if $workshop->price == 0}ZDARMA{else}{$workshop->price},- Kč{/if}</li>
 							<li><i class="fa fa-users" aria-hidden="true"></i>  {if $workshop->capacity == 0}neomezeno{else}{$workshop->occupancy}/{$workshop->capacity}{/if}
 							</li>
 						</ul>
@@ -47,7 +46,6 @@
                                         <div class="info-panel-mobile">
 						<ul>
 							<li><i class="fa fa-clock-o" aria-hidden="true"></i> {$workshop->time_from|date:'%H:%M'} - {$workshop->time_to|date:'%H:%M'}</li>
-							<li><i class="fa fa-money" aria-hidden="true"></i> {if $workshop->price == 0}ZDARMA{else}{$workshop->price},- Kč{/if}</li>
 							<li><i class="fa fa-users" aria-hidden="true"></i>  {$workshop->occupancy}/{$workshop->capacity} 
 							</li>
 						</ul>
@@ -56,7 +54,6 @@
 			</div>
                 {/foreach}
 		<div class="submitWorkshops">
-			<span class="totalPrice">Celková cena vybraných workshopů: <strong>0,-&nbsp;Kč</strong></span>
 			<input n:name=send id="sendForm" disabled type="submit" value="ZÁVAZNĚ SE ZAPSAT">
 		</div>
 		</form>
